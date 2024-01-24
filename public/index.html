@@ -7,6 +7,7 @@
         async function handleSubmit(event) {
             event.preventDefault();
             const serialNumber = document.getElementById('serialNumber').value;
+            const amountLeft = parseFloat(document.getElementById('amountLeft').value); // Parse the amount as a float
 
             try {
                 const response = await fetch('/getBatteryVoltage', {
@@ -22,13 +23,18 @@
                 }
 
                 const data = await response.json();
+                const voltage = data.battery_pack_voltage;
+                const calculatedAmount = 5.25 - (voltage * 60/1000);
+
                 console.log("Data received from server", data);
 
-                // Store the data for access on the results page
-                sessionStorage.setItem('batteryPackVoltage', data.battery_pack_voltage);
-
-                // Redirect to results.html
-                window.location.href = 'results.html';
+                if (calculatedAmount.toFixed(2) === amountLeft.toFixed(2)) { // Check if the amounts match
+                    const amountOwed = (5.25 - amountLeft) * (680 / 5.25);
+                    sessionStorage.setItem('amountOwed', amountOwed.toFixed(2));
+                    window.location.href = 'approved_results.html';
+                } else {
+                    window.location.href = 'not_approved_results.html';
+                }
 
             } catch (error) {
                 console.error('Fetch error:', error);
@@ -36,8 +42,75 @@
             }
         }
 
+
     </script>
 </head>
+<head>
+    <title>Enzi Motors Battery Information</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        /* Additional custom styles for form */
+        .login-form {
+            width: 100%; /* Adjust as needed */
+            max-width: 700px; /* Maximum width of the form */
+            margin: 0 auto; /* Centering the form */
+            padding: 15px;
+            box-sizing: border-box;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            width: 80%; /* Match the width of input fields */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .form-group label {
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #333;
+            display: block; /* Ensure label takes full width */
+        }
+
+        .form-group input[type="text"] {
+            width: 100%; /* Full width within form-group */
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #007bff;
+            border-radius: 6px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+            font-size: 16px;
+        }
+
+        .form-group input[type="text"]:focus {
+            outline: none;
+            border-color: #0056b3;
+            box-shadow: 0 0 5px #007bff;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: 2px solid #007bff; /* Match border of input fields */
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 16px;
+            padding: 12px; /* Match padding of input fields */
+            width: calc(90% - 28px); /* Adjust for border and padding */
+            margin-left: 0.60in;
+            margin-right: auto;
+            display: block; /* Make button a block-level element */
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+
+
 <body>
     <div class="container">
         <header>
@@ -50,8 +123,8 @@
                     <input type="text" id="serialNumber" name="serialNumber" placeholder="Enter Serial Number">
                 </div>
                 <div class="form-group">
-                    <label for="amountOwed">Amount Owed</label>
-                    <input type="text" id="amountOwed" name="amountOwed" placeholder="Enter Amount Owed">
+                    <label for="amountLeft">Amount Left</label>
+                    <input type="text" id="amountLeft" name="amountLeft" placeholder="Enter Amount Left">
                 </div>
                 <button type="submit">Submit</button>
             </form>

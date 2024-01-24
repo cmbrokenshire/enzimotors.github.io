@@ -15,6 +15,7 @@
         // Retrieve and display the data
         document.addEventListener('DOMContentLoaded', (event) => {
             const voltage = sessionStorage.getItem('batteryPackVoltage');
+            const amountLeft = sessionStorage.getItem('amountLeft')
             document.getElementById('voltageDisplay').innerText = `Battery Pack Voltage: ${voltage}`;
         });
     </script>
