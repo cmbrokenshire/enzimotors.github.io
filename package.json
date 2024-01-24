@@ -1,0 +1,25 @@
+{
+  "name": "package.json",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "enzi",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cmbrokenshire/enzimotors.github.io.git"
+  },
+  "author": "Christopher Brokenshire",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cmbrokenshire/enzimotors.github.io/issues"
+  },
+  "homepage": "https://github.com/cmbrokenshire/enzimotors.github.io#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "node-fetch": "^3.3.2"
+  }
+}

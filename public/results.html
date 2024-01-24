@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Results</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Battery Pack Voltage</h2>
+        <div id="voltageDisplay"></div>
+        <button onclick="window.location.href='index.html'">Back</button>
+    </div>
+
+    <script>
+        // Retrieve and display the data
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const voltage = sessionStorage.getItem('batteryPackVoltage');
+            document.getElementById('voltageDisplay').innerText = `Battery Pack Voltage: ${voltage}`;
+        });
+    </script>
+</body>
+</html>

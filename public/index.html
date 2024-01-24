@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Enzi Motors Battery Information</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script>
+        async function handleSubmit(event) {
+            event.preventDefault();
+            const serialNumber = document.getElementById('serialNumber').value;
+
+            try {
+                const response = await fetch('/getBatteryVoltage', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ serialNumber: serialNumber })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                console.log("Data received from server", data);
+
+                // Store the data for access on the results page
+                sessionStorage.setItem('batteryPackVoltage', data.battery_pack_voltage);
+
+                // Redirect to results.html
+                window.location.href = 'results.html';
+
+            } catch (error) {
+                console.error('Fetch error:', error);
+                alert("Error fetching data: " + error.message);
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="Enzi-logo-400px.png" alt="Enzi Motors Logo" class="logo">
+        </header>
+        <div class="login-form">
+            <form onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="serialNumber">Serial Number</label>
+                    <input type="text" id="serialNumber" name="serialNumber" placeholder="Enter Serial Number">
+                </div>
+                <div class="form-group">
+                    <label for="amountOwed">Amount Owed</label>
+                    <input type="text" id="amountOwed" name="amountOwed" placeholder="Enter Amount Owed">
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+
