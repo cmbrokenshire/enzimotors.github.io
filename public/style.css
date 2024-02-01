@@ -1,10 +1,10 @@
 body {
     font-family: Arial, sans-serif;
-    background-image: url('bike_photo.jpeg'); /* Set the background image */
-    background-size: cover; /* Ensure it covers the entire background */
+    background-image: url('bike_photo.jpeg'); 
+    background-size: cover; 
     background-position: center;
     background-repeat: no-repeat;
-    color: #333; /* Example text color */
+    color: #333; 
     margin: 0;
     padding: 0;
     display: flex;
@@ -16,7 +16,7 @@ body {
 .container {
     width: 80%;
     max-width: 600px;
-    background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    background: rgba(255, 255, 255, 0.8); 
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -24,11 +24,11 @@ body {
 .logo {
     display: block;
     margin: 0 auto;
-    width: auto; /* Adjust based on actual size */
-    height: 100px; /* Example height, adjust as needed */
+    width: auto; 
+    height: 100px; 
 }
 
-/* Rest of the CSS remains the same */
+
 
 
 .login-form {
@@ -52,7 +52,7 @@ body {
 }
 
 button {
-    background-color: #0056b3; /* Example button color */
+    background-color: #0056b3; 
     color: #fff;
     border: none;
     padding: 10px 15px;
@@ -61,5 +61,5 @@ button {
 }
 
 button:hover {
-    background-color: #004494; /* Darker shade for hover effect */
+    background-color: #004494; 
 }
